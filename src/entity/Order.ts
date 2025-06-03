@@ -16,9 +16,6 @@ export class Order {
     @Column('decimal', { precision: 10, scale: 2 })
     totalAmount: number;
 
-    @ManyToOne(() => Product, product => product.orders)
-    product: Product;
-
     @Column()
     status: string;
 }

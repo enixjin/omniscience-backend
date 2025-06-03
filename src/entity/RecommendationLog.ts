@@ -6,8 +6,8 @@ export class RecommendationLog {
     @PrimaryGeneratedColumn()
     logId: number;
 
-    @ManyToOne(() => Customer, customer => customer.recommendationLogs)
-    customer: Customer;
+    // @ManyToOne(() => Customer, customer => customer.recommendationLogs)
+    // customer: Customer;
 
     @Column('json')
     recommendationDetails: any;

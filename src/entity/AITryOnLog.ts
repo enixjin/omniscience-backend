@@ -7,13 +7,13 @@ export class AITryOnLog {
     @PrimaryGeneratedColumn()
     logId: number;
 
-    @ManyToOne(() => Customer, customer => customer.aiTryOnLogs)
-    customer: Customer;
+    // @ManyToOne(() => Customer, customer => customer.aiTryOnLogs)
+    // customer: Customer;
 
-    @ManyToOne(() => Product, product => product.topAITryOnLogs)
-    topProduct: Product;
+    // @ManyToOne(() => Product, product => product.topAITryOnLogs)
+    // topProduct: Product;
 
-    @ManyToOne(() => Product, product => product.bottomAITryOnLogs)
+    @ManyToOne(() => Product, product => product.productId)
     bottomProduct: Product;
 
     @Column('text')
