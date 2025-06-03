@@ -65,3 +65,5 @@ CREATE TABLE AITryOnLog (
     FOREIGN KEY (top_productId) REFERENCES Product(productId),
     FOREIGN KEY (bottom_productId) REFERENCES Product(productId)
 );
+
+insert into customer values(1,'Enix','enix@enix.net','13912345601','addresshere','male','hello');
