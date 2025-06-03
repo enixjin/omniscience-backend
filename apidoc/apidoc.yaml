@@ -102,29 +102,25 @@ components:
 paths:
   /customers:
     get:
-      summary: Get all customers
+      summary: Get customers filtered by phone number
+      parameters:
+        - name: phone
+          in: query
+          required: false
+          description: Filter customers by phone number
+          schema:
+            type: string
+            maxLength: 20
+            example: "+1234567890"
       responses:
         '200':
-          description: Successful operation
+          description: List of matching customers (may be empty)
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Customer'
-    post:
-      summary: Create a new customer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Customer'
-      responses:
-        '201':
-          description: Customer created successfully
-        '400':
-          description: Invalid input data
 
   /customers/{id}:
     get:
@@ -145,42 +141,6 @@ paths:
         '404':
           description: Customer not found
     
-    put:
-      summary: Update customer by ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Customer'
-      responses:
-        '200':
-          description: Customer updated successfully
-        '400':
-          description: Invalid input data
-        '404':
-          description: Customer not found
-
-    delete:
-      summary: Delete customer by ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '204':
-          description: Customer deleted successfully
-        '404':
-          description: Customer not found
-
   /products:
     get:
       summary: Get all products
@@ -193,19 +153,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Product'
-    post:
-      summary: Create a new product
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Product'
-      responses:
-        '201':
-          description: Product created successfully
-        '400':
-          description: Invalid input data
 
   /products/{id}:
     get:
@@ -226,42 +173,6 @@ paths:
         '404':
           description: Product not found
 
-    put:
-      summary: Update product by ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Product'
-      responses:
-        '200':
-          description: Product updated successfully
-        '400':
-          description: Invalid input data
-        '404':
-          description: Product not found
-
-    delete:
-      summary: Delete product by ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '204':
-          description: Product deleted successfully
-        '404':
-          description: Product not found
-
   /orders:
     get:
       summary: Get all orders
@@ -274,19 +185,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Order'
-    post:
-      summary: Create a new order
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Order'
-      responses:
-        '201':
-          description: Order created successfully
-        '400':
-          description: Invalid input data
 
   /orders/{id}:
     get:
@@ -307,41 +205,6 @@ paths:
         '404':
           description: Order not found
 
-    put:
-      summary: Update order by ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Order'
-      responses:
-        '200':
-          description: Order updated successfully
-        '400':
-          description: Invalid input data
-        '404':
-          description: Order not found
-
-    delete:
-      summary: Delete order by ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '204':
-          description: Order deleted successfully
-        '404':
-          description: Order not found
 
   /customers/{customerId}/orders:
     get:
@@ -361,27 +224,5 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Order'
-        '404':
-          description: Customer not found
-
-    post:
-      summary: Create a new order for a specific customer
-      parameters:
-        - name: customerId
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Order'
-      responses:
-        '201':
-          description: Order created successfully
-        '400':
-          description: Invalid input data
         '404':
           description: Customer not found
