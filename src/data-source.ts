@@ -9,12 +9,12 @@ import { Product } from "./entity/Product"
 import { RecommendationLog } from "./entity/RecommendationLog"
 
 export const AppDataSource = new DataSource({
-    type: "mysql",
-    host: "localhost",
-    username: "root",
-    password: "jjyyxx1981",
-    database: "omniscience",
-    synchronize: false,
+    type: (process.env.DB_TYPE as any) || "mysql",
+    host: process.env.DB_HOST || "localhost",
+    username: process.env.DB_USERNAME || "root",
+    password: process.env.DB_PASSWORD || "",
+    database: process.env.DB_DATABASE || "omniscience",
+    synchronize: process.env.DB_SYNCHRONIZE === "true",
     logging: false,
     entities: [AITryOnLog, Chat, Customer, CustomerTagDefinition, Order, Product, RecommendationLog],
     migrations: [],
