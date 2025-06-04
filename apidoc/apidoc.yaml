@@ -173,39 +173,6 @@ paths:
         '404':
           description: Product not found
 
-  /orders:
-    get:
-      summary: Get all orders
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Order'
-
-  /orders/{id}:
-    get:
-      summary: Get order by ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Order'
-        '404':
-          description: Order not found
-
-
   /customers/{customerId}/orders:
     get:
       summary: Get all orders for a specific customer

@@ -1,8 +1,12 @@
 import * as express from "express";
 import { CustomerService } from '../service/CustomerService';
+import { OrderService } from '../service/OrderService';
+import { ChatService } from "../service/ChatService";
 
 const router = express.Router();
 const customerService = new CustomerService();
+const orderService = new OrderService();
+const chatService = new ChatService();
 
 // Get customers by phone
 router.get('/', async (req, res) => {
@@ -20,56 +24,28 @@ router.get('/', async (req, res) => {
 });
 
 // Get customer by ID
-router.get('/:id', async (req, res) => {
+router.get('/orders', async (req, res) => {
   try {
-    const customerId = parseInt(req.params.id);
-    const customer = await customerService.getCustomerById(customerId);
-    if (customer) {
-      res.json(customer);
+    const customerId = parseInt(req.query.id);
+    const orders = await orderService.getOrderByCustomerID(customerId);
+    if (orders) {
+      res.json(orders);
     } else {
-      res.status(404).json({ message: 'Customer not found' });
+      res.status(404).json({ message: 'orders not found' });
     }
   } catch (error) {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
 
-// Create a new customer
-router.post('/', async (req, res) => {
+router.get('/chats', async (req, res) => {
   try {
-    const customerData = req.body;
-    const newCustomer = await customerService.createCustomer(customerData);
-    res.status(201).json(newCustomer);
-  } catch (error) {
-    res.status(400).json({ message: 'Invalid input data' });
-  }
-});
-
-// Update customer by ID
-router.put('/:id', async (req, res) => {
-  try {
-    const customerId = parseInt(req.params.id);
-    const updatedData = req.body;
-    const updatedCustomer = await customerService.updateCustomer(customerId, updatedData);
-    if (updatedCustomer) {
-      res.json(updatedCustomer);
+    const customerId = parseInt(req.query.id);
+    const chats = await chatService.getChatByCustomerID(customerId);
+    if (chats) {
+      res.json(chats);
     } else {
-      res.status(404).json({ message: 'Customer not found' });
-    }
-  } catch (error) {
-    res.status(400).json({ message: 'Invalid input data' });
-  }
-});
-
-// Delete customer by ID
-router.delete('/:id', async (req, res) => {
-  try {
-    const customerId = parseInt(req.params.id);
-    const result = await customerService.deleteCustomer(customerId);
-    if (result) {
-      res.status(204).send();
-    } else {
-      res.status(404).json({ message: 'Customer not found' });
+      res.status(404).json({ message: 'chats not found' });
     }
   } catch (error) {
     res.status(500).json({ message: 'Internal server error' });

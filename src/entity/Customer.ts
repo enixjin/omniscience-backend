@@ -24,6 +24,4 @@ export class Customer {
     @Column('text')
     title: string;
 
-    @OneToMany(() => Order, (Order) => Order.customer)
-    orders: Order[]
 }

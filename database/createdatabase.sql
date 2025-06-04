@@ -1,3 +1,7 @@
+CREATE DATABASE IF NOT EXISTS omniscience;
+
+use omniscience;
+
 CREATE TABLE Customer (
     customerId INT PRIMARY KEY, -- 客户唯⼀标识
     name VARCHAR(100), -- 客户姓名
@@ -28,7 +32,7 @@ CREATE TABLE `Order` (
     status VARCHAR(50), -- 订单状态 (如：已下单、已发货等)
     FOREIGN KEY (customerId) REFERENCES Customer(customerId),
     FOREIGN KEY (productId) REFERENCES Product(productId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+);
 
 CREATE TABLE Chat (
     chatId INT PRIMARY KEY, -- 聊天记录唯⼀标识
@@ -67,3 +71,11 @@ CREATE TABLE AITryOnLog (
 );
 
 insert into customer values(1,'Enix','enix@enix.net','13912345601','addresshere','male','hello');
+
+insert into product values(1,'product1','category1','subcategory1',5000.00,'imageurl1','description1');
+
+insert into `Order` values(1,1,'2023-01-01',5000.00,1,'pending');
+insert into `Order` values(2,1,'2024-01-02',3000.00,1,'completed');
+
+insert into chat values(1,1,1,'你好，我想买西装','2023-01-01 00:00:00');
+insert into chat values(2,1,1,'好的，我喜欢穿长裤','2023-01-01 00:05:00');
