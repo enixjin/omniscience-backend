@@ -1,5 +1,6 @@
 import customerRoutes from './routes/customerRoutes';
 import productRoutes from './routes/productsRoutes';
+import tagRoutes from './routes/tagRoutes';
 const mime = require('mime-types');
 const OSS = require("ali-oss");
 
@@ -7,6 +8,7 @@ const OSS = require("ali-oss");
 export const initRouters = (app) => {
   app.use('/api/customers', customerRoutes);
   app.use('/api/products', productRoutes);
+  app.use('/api/tags', tagRoutes);
   app.get('/api/get_post_signature_for_oss_upload', async (req, res) => {
     const fileName = req.query.fileName;
     const signatureUrl = await generateSignatureUrl(fileName);
