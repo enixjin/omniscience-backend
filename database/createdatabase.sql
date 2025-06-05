@@ -79,3 +79,8 @@ insert into `Order` values(2,1,'2024-01-02',3000.00,1,'completed');
 
 insert into chat values(1,1,1,'你好，我想买西装','2023-01-01 00:00:00');
 insert into chat values(2,1,1,'好的，我喜欢穿长裤','2023-01-01 00:05:00');
+
+insert into customerTagDefinition values(1,'高价值客户','客户每次都买金额都在5000以上');
+insert into customerTagDefinition values(2,'一般客户','客户每次都买金额都在3000以下');
+insert into customerTagDefinition values(3,'高频购买客户','客户每个月都购买产品');
+insert into customerTagDefinition values(4,'低频购买客户','客户至少6个月以上购买一次');

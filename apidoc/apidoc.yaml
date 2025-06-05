@@ -1,10 +1,10 @@
 openapi: 3.0.0
 info:
-  title: Customer & Product Management API
+  title: OmniScience Backend API
   version: 1.0.0
   description: RESTful API for managing customers, products, and related entities
 servers:
-  - url: http://localhost:8080/api
+  - url: http://8.140.56.123/api
     description: Development server
 
 components:
@@ -99,6 +99,23 @@ components:
           maxLength: 50
           example: "Processing"
 
+    CustomerTagDefinition:
+      type: object
+      required: [tagId, tagName, description]
+      properties:
+        tagId:
+          type: integer
+          format: int32
+          example: 12345
+        tagName:
+          type: string
+          maxLength: 50
+          example: "Smartphone"
+        description:
+          type: string
+          maxLength: 100
+          example: "Smartphone with 5G"
+
 paths:
   /customers:
     get:
@@ -122,12 +139,12 @@ paths:
                 items:
                   $ref: '#/components/schemas/Customer'
 
-  /customers/{id}:
+  /customers/order:
     get:
-      summary: Get customer by ID
+      summary: Get customer order by Customer ID
       parameters:
         - name: id
-          in: path
+          in: query
           required: true
           schema:
             type: integer
@@ -137,7 +154,30 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Customer'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+        '404':
+          description: Customer not found
+
+  /customers/chats:
+    get:
+      summary: Get customer chats by Customer ID
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
         '404':
           description: Customer not found
     
@@ -154,34 +194,9 @@ paths:
                 items:
                   $ref: '#/components/schemas/Product'
 
-  /products/{id}:
+  /tags:
     get:
-      summary: Get product by ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Product'
-        '404':
-          description: Product not found
-
-  /customers/{customerId}/orders:
-    get:
-      summary: Get all orders for a specific customer
-      parameters:
-        - name: customerId
-          in: path
-          required: true
-          schema:
-            type: integer
+      summary: Get all tags
       responses:
         '200':
           description: Successful operation
@@ -190,6 +205,4 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Order'
-        '404':
-          description: Customer not found
+                  $ref: '#/components/schemas/CustomerTagDefinition'
