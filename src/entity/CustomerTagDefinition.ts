@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-@Entity()
+@Entity("CustomerTagDefinition")
 export class CustomerTagDefinition {
     @PrimaryGeneratedColumn()
     tagId: number;
