@@ -31,7 +31,7 @@ async function generateSignatureUrl(fileName) {
 
   return await client.signatureUrlV4('PUT', 3600, {
     headers: {
-      'Content-Type': `fileType`
+      'Content-Type': `${fileType}`
     } // 请根据实际发送的请求头设置此处的请求头
   }, fileName);
 }

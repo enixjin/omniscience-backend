@@ -4,11 +4,13 @@ import * as bodyParser from "body-parser"
 import { Request, Response } from "express"
 import { AppDataSource } from "./data-source"
 import { initRouters } from "./routes"
+import * as cors from "cors"
 
 AppDataSource.initialize().then(async () => {
 
     // create express app
     const app = express()
+    app.use(cors())
     app.use(bodyParser.json())
 
     initRouters(app);
