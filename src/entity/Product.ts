@@ -9,6 +9,9 @@ export class Product {
     productName: string;
 
     @Column()
+    gender: string;
+
+    @Column()
     category: string;
 
     @Column()
