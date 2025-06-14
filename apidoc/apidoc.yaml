@@ -51,6 +51,10 @@ components:
           type: string
           maxLength: 100
           example: "Smartphone X"
+        gender:
+          type: string
+          enum: [M, F]
+          example: "M"
         category:
           type: string
           maxLength: 50
@@ -184,6 +188,12 @@ paths:
   /products:
     get:
       summary: Get all products
+      parameters:
+        - name: gender
+          in: query
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: Successful operation

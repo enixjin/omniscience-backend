@@ -26,7 +26,11 @@ router.get('/', async (req, res) => {
 // Get customer by ID
 router.get('/orders', async (req, res) => {
   try {
-    const customerId = parseInt(req.query.id);
+    const idParam = req.query.id;
+    if (typeof idParam !== 'string') {
+      return res.status(400).json({ message: 'Invalid ID' });
+    }
+    const customerId = parseInt(idParam);
     const orders = await orderService.getOrderByCustomerID(customerId);
     if (orders) {
       res.json(orders);
@@ -40,7 +44,11 @@ router.get('/orders', async (req, res) => {
 
 router.get('/chats', async (req, res) => {
   try {
-    const customerId = parseInt(req.query.id);
+    const idParam = req.query.id;
+    if (typeof idParam !== 'string') {
+      return res.status(400).json({ message: 'Invalid ID' });
+    }
+    const customerId = parseInt(idParam);
     const chats = await chatService.getChatByCustomerID(customerId);
     if (chats) {
       res.json(chats);
